@@ -11,6 +11,7 @@ class Game : public vubi::Application {
         void input(SDL_Event& event) override;
         void update() override;
         void init() override;
+        void draw_rectangle();
 
     private:
 

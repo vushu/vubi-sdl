@@ -32,8 +32,8 @@ bool Application::setup_sdl()  {
         return false;
     }
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
-    if (renderer == nullptr)
+    renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
+    if (renderer_ == nullptr)
     {
         SDL_Log("Could not create a renderer: %s", SDL_GetError());
         return false;
@@ -47,8 +47,9 @@ bool Application::setup_sdl()  {
             printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
             return false;
         }
-        else
+        else{
             screen_surface_ = SDL_GetWindowSurface(window_);
+        }
     }
 
     return success;
@@ -93,10 +94,15 @@ void Application::draw_color(int r, int g, int b, int a) {
 }
 
 void Application::setup_defaults() {
-    draw_color(133, 158, 204, 255);
+}
+
+void Application::clear(int r, int g, int b, int a) {
+    draw_color(r, g, b, a);
+    SDL_RenderClear(renderer_);
 }
 
 void Application::clear() {
+    draw_color(133, 158, 204, 255);
     SDL_RenderClear(renderer_);
 }
 

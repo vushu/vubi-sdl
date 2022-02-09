@@ -20,6 +20,7 @@ namespace vubi {
             virtual void init();
             void draw_color(int r, int g, int b, int a);
             void clear();
+            void clear(int r, int g, int b, int a);
             void render();
             void quit();
         private:

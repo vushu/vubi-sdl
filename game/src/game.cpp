@@ -1,7 +1,9 @@
 #include "game.hpp"
 #include "vubi/application.hpp"
+#include <SDL_render.h>
 #include <SDL_timer.h>
 #include <string>
+#include <iostream>
 
 Game::Game(std::string title, int width, int height): vubi::Application(title, width, height) {}
 
@@ -32,5 +34,18 @@ void Game::update() {
 
     clear();
     // Draw stuff
+    draw_rectangle();
     render();
+}
+
+void Game::draw_rectangle() {
+    SDL_Rect rectangle;
+    rectangle.x = 20;
+    rectangle.y = 20;
+    rectangle.w = 50;
+    rectangle.h = 50;
+
+    SDL_SetRenderDrawColor(renderer_, 0, 0, 255, 255 );
+
+    SDL_RenderFillRect(renderer_, &rectangle);
 }
