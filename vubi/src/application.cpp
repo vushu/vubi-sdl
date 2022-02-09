@@ -93,7 +93,7 @@ void Application::draw_color(int r, int g, int b, int a) {
 }
 
 void Application::setup_defaults() {
-    draw_color(100, 149, 237, 255);
+    draw_color(133, 158, 204, 255);
 }
 
 void Application::clear() {
@@ -110,6 +110,7 @@ void Application::quit() {
 
 void Application::run() {
     if (setup_sdl()) {
+        setup_defaults();
         init();
         game_loop();
         destroy_sdl();
