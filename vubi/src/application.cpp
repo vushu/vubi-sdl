@@ -25,7 +25,7 @@ bool Application::setup_sdl()  {
             SDL_WINDOWPOS_UNDEFINED,
             width_,
             height_,
-            SDL_WINDOW_OPENGL);
+            0);
     if (window_ == nullptr)
     {
         SDL_Log("Could not create a window: %s", SDL_GetError());
