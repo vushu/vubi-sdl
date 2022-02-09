@@ -25,4 +25,7 @@ void Game::input(SDL_Event& event) {
 
 void Game::update() {
 
+    clear();
+    // Draw stuff
+    render();
 }

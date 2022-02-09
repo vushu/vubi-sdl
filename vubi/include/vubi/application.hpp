@@ -18,11 +18,15 @@ namespace vubi {
             virtual void input(SDL_Event& event);
             virtual void update();
             virtual void init();
+            void draw_color(int r, int g, int b, int a);
+            void clear();
+            void render();
             void quit();
         private:
             bool running_ = true;
             const Uint32 fps_ = 60;
             const Uint32 minframetime_ = 1000 / fps_;
+            void setup_defaults();
             bool setup_sdl();
             void game_loop();
             void destroy_sdl();

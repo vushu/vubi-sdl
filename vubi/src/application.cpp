@@ -1,3 +1,4 @@
+#include <SDL_render.h>
 #include <vubi/application.hpp>
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -85,6 +86,22 @@ void Application::game_loop() {
             SDL_Delay (minframetime_ - (SDL_GetTicks () - frametime));
 
     }
+}
+
+void Application::draw_color(int r, int g, int b, int a) {
+    SDL_SetRenderDrawColor(renderer_, r, g, b, a);
+}
+
+void Application::setup_defaults() {
+    draw_color(100, 149, 237, 255);
+}
+
+void Application::clear() {
+    SDL_RenderClear(renderer_);
+}
+
+void Application::render() {
+    SDL_RenderPresent(renderer_);
 }
 
 void Application::quit() {
