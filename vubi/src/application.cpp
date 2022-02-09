@@ -13,10 +13,11 @@ bool Application::setup_sdl()  {
 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
-        std::cout << "Failed to initialise SDL\n";
+        std::cout << "Error initializing SDL: " << SDL_GetError () << std::endl;
         return false;
     }
 
+    atexit (&SDL_Quit);
     // Create a window
     window_ = SDL_CreateWindow(title_.c_str(),
             SDL_WINDOWPOS_UNDEFINED,
@@ -45,14 +46,60 @@ bool Application::setup_sdl()  {
             printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
             return false;
         }
-        screen_surface_ = SDL_GetWindowSurface(window_);
+        else
+            screen_surface_ = SDL_GetWindowSurface(window_);
     }
 
     return success;
 }
 
-bool Application::run() {
-    return setup_sdl();
+//Virtual methods
+void Application::init() {}
+void Application::input(SDL_Event& event) {}
+void Application::update() {}
+
+void Application::destroy_sdl() {
+    SDL_FreeSurface(screen_surface_);
+    SDL_DestroyRenderer(renderer_);
+    SDL_DestroyWindow(window_);
+    SDL_Quit();
+}
+
+void Application::game_loop() {
+    SDL_Event event;
+    Uint32 frametime;
+
+    while (running_)
+    {
+        frametime = SDL_GetTicks ();
+
+        while (SDL_PollEvent (&event) != 0)
+        {
+            input(event);
+        }
+
+        update();
+
+
+        if (SDL_GetTicks () - frametime < minframetime_)
+            SDL_Delay (minframetime_ - (SDL_GetTicks () - frametime));
+
+    }
+}
+
+void Application::quit() {
+    running_ = false;
+}
+
+void Application::run() {
+    if (setup_sdl()) {
+        init();
+        game_loop();
+        destroy_sdl();
+    }
+    else{
+        std::cout << "Failed to Init SDL" << std::endl;
+    }
 }
 
 

@@ -8,6 +8,10 @@ class Game : public vubi::Application {
         Game(std::string title, int width, int height);
         ~Game();
 
+        void input(SDL_Event& event) override;
+        void update() override;
+        void init() override;
+
     private:
 
 };
