@@ -1,3 +1,5 @@
+#pragma once
+#include <SDL2/SDL.h>
 namespace vubi {
     class Application {
         public:
@@ -6,6 +8,6 @@ namespace vubi {
             void run();
 
         private:
-
+            SDL_Window* sdl_window;
     };
 }
