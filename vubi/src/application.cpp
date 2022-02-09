@@ -1,5 +1,6 @@
 #include <vubi/application.hpp>
 #include <SDL2/SDL_image.h>
+#include <iostream>
 using namespace vubi;
 
 Application::~Application() {
@@ -7,17 +8,33 @@ Application::~Application() {
 }
 
 bool Application::setup_sdl()  {
-    bool success = false;
+    bool success = true;
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize SDL: %s", SDL_GetError());
+
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+    {
+        std::cout << "Failed to initialise SDL\n";
+        return false;
     }
 
-    if (SDL_CreateWindowAndRenderer(320, 240, SDL_WINDOW_RESIZABLE, &window_, &renderer_)) {
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window and renderer: %s", SDL_GetError());
+    // Create a window
+    window_ = SDL_CreateWindow(title_.c_str(),
+            SDL_WINDOWPOS_UNDEFINED,
+            SDL_WINDOWPOS_UNDEFINED,
+            width_,
+            height_,
+            SDL_WINDOW_OPENGL);
+    if (window_ == nullptr)
+    {
+        SDL_Log("Could not create a window: %s", SDL_GetError());
+        return false;
     }
-    else{
-        success = true;
+
+    SDL_Renderer *renderer = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
+    if (renderer == nullptr)
+    {
+        SDL_Log("Could not create a renderer: %s", SDL_GetError());
+        return false;
     }
 
     if (success){
@@ -26,13 +43,11 @@ bool Application::setup_sdl()  {
         if( !( IMG_Init( imgFlags ) & imgFlags ) )
         {
             printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
-            success = false;
+            return false;
         }
-        else
-        {
-            success = true;
-        }
+        screen_surface_ = SDL_GetWindowSurface(window_);
     }
+
     return success;
 }
 
