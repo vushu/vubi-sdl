@@ -25,8 +25,9 @@ namespace vubi {
             void quit();
         private:
             bool running_ = true;
-            const float time_per_frame = 1.0f/60.0;
+            const float ms_per_frame = 1000.0f/60.0;
             void setup_defaults();
+            void handle_inputs(SDL_Event& event);
             bool setup_sdl();
             void game_loop();
             void destroy_sdl();

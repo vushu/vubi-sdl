@@ -64,30 +64,38 @@ void Application::destroy_sdl() {
     SDL_FreeSurface(screen_surface_);
     SDL_DestroyRenderer(renderer_);
     SDL_DestroyWindow(window_);
+    IMG_Quit();
     SDL_Quit();
+}
+
+void Application::handle_inputs(SDL_Event& event) {
+
+    while (SDL_PollEvent (&event) != 0)
+    {
+        input(event);
+    }
+
 }
 
 void Application::game_loop() {
     SDL_Event event;
-    Uint64 now = SDL_GetPerformanceCounter();
+    Uint64 now;
     Uint64 last;
-    double deltaTime;
+    float delta_time;
 
     while (running_)
     {
-        last = now;
-        while (SDL_PollEvent (&event) != 0)
-        {
-            input(event);
-        }
+        now = SDL_GetPerformanceCounter();
 
-        deltaTime = (double)((now - last)*1000 / (double)SDL_GetPerformanceFrequency() );
+        //Game logic
+        handle_inputs(event);
         update();
 
-        if (deltaTime < time_per_frame){
-            //SDL_Delay();
-        }
+        last = SDL_GetPerformanceCounter();
 
+        //So we aren't hogging the CPU
+        delta_time = (last - now) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+        SDL_Delay(std::floor(ms_per_frame - delta_time));
 
     }
 }
