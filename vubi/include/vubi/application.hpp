@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include <SDL_ttf.h>
 #include <string>
 namespace vubi {
     class Application {
@@ -15,6 +16,7 @@ namespace vubi {
             SDL_Window* window_;
             SDL_Renderer* renderer_;
             SDL_Surface* screen_surface_;
+            TTF_Font* default_font_;
             virtual void input(SDL_Event& event);
             virtual void update();
             virtual void init();

@@ -1,4 +1,5 @@
 #include <SDL_render.h>
+#include <SDL_ttf.h>
 #include <vubi/application.hpp>
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -52,6 +53,17 @@ bool Application::setup_sdl()  {
         }
     }
 
+    if (success)
+    {
+        if (TTF_Init() == -1){
+            SDL_Log("Failed to init TTF: %s", TTF_GetError());
+            success = false;
+        }
+        else
+            this->default_font_ = TTF_OpenFont("resources/fonts/Lato-Regular.ttf", 25);
+
+    }
+
     return success;
 }
 
@@ -65,6 +77,8 @@ void Application::destroy_sdl() {
     SDL_DestroyRenderer(renderer_);
     SDL_DestroyWindow(window_);
     IMG_Quit();
+    TTF_CloseFont(default_font_);
+    TTF_Quit();
     SDL_Quit();
 }
 

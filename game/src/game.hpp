@@ -12,7 +12,10 @@ class Game : public vubi::Application {
         void update() override;
         void init() override;
         void draw_rectangle();
+        void init_welcome();
+        void draw_welcome();
 
     private:
+        SDL_Texture* welcome_texture;
 
 };
