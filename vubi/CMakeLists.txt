@@ -38,9 +38,9 @@ target_include_directories(${PROJECT_NAME}
 
 find_package(SDL2 REQUIRED)
 #find_package(SDL2_net REQUIRED)
-#find_package(SDL2_mixer REQUIRED)
+find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_image REQUIRED)
 #find_package(SDL2_gfx REQUIRED)
-#find_package(SDL2_ttf REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 
-target_link_libraries(${PROJECT_NAME} SDL2::Main SDL2::Image)
+target_link_libraries(${PROJECT_NAME} SDL2::Main SDL2::Image SDL2::Mixer SDL2::TTF)
