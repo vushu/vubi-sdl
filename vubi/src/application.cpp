@@ -1,3 +1,4 @@
+#include <SDL_mixer.h>
 #include <SDL_render.h>
 #include <SDL_ttf.h>
 #include <vubi/application.hpp>
@@ -64,6 +65,21 @@ bool Application::setup_sdl()  {
 
     }
 
+    if (success){
+        int audio_rate = 22050;
+        Uint16 audio_format = AUDIO_S16;
+        int audio_channels = 2;
+        int audio_buffers= 4096;
+
+        if (Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers) < 0)
+        {
+            SDL_Log( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+            success = false;
+        }
+        else
+            Mix_QuerySpec(&audio_rate, &audio_format, &audio_channels);
+    }
+
     return success;
 }
 
@@ -76,6 +92,7 @@ void Application::destroy_sdl() {
     SDL_FreeSurface(screen_surface_);
     SDL_DestroyRenderer(renderer_);
     SDL_DestroyWindow(window_);
+    Mix_Quit();
     IMG_Quit();
     TTF_CloseFont(default_font_);
     TTF_Quit();

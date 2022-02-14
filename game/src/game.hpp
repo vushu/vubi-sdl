@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL_mixer.h>
 #include <vubi/application.hpp>
 #include <string>
 
@@ -14,8 +15,11 @@ class Game : public vubi::Application {
         void draw_rectangle();
         void init_welcome();
         void draw_welcome();
+        void play_sound();
 
     private:
         SDL_Texture* welcome_texture;
+        Mix_Chunk* sound_fx;
+        Mix_Music* music;
 
 };

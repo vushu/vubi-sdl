@@ -3,15 +3,18 @@
 #include <string>
 #include <iostream>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 
 Game::Game(std::string title, int width, int height): vubi::Application(title, width, height) {}
 
 Game::~Game() {
     SDL_DestroyTexture(welcome_texture);
+    Mix_FreeMusic(music);
 }
 
 void Game::init() {
     init_welcome();
+    play_sound();
 }
 
 void Game::input(SDL_Event& event) {
@@ -20,7 +23,6 @@ void Game::input(SDL_Event& event) {
         case SDL_QUIT:
             quit();
             break;
-
         case SDL_KEYDOWN: if (event.key.keysym.sym == SDLK_ESCAPE)
                               quit();
                           break;
@@ -35,9 +37,16 @@ void Game::update() {
     // Draw stuff
     draw_rectangle();
     draw_welcome();
+
     render();
 }
 
+
+void Game::play_sound() {
+    music = Mix_LoadMUS("resources/sounds/just_a_sound.mp3");
+    Mix_PlayMusic(music, 0);
+
+}
 
 void Game::draw_welcome() {
     int texture_width = 0;
