@@ -69,22 +69,25 @@ void Application::destroy_sdl() {
 
 void Application::game_loop() {
     SDL_Event event;
-    Uint32 frametime;
+    Uint64 now = SDL_GetPerformanceCounter();
+    Uint64 last;
+    double deltaTime;
 
     while (running_)
     {
-        frametime = SDL_GetTicks ();
-
+        last = now;
         while (SDL_PollEvent (&event) != 0)
         {
             input(event);
         }
 
+        deltaTime = (double)((now - last)*1000 / (double)SDL_GetPerformanceFrequency() );
         update();
 
+        if (deltaTime < time_per_frame){
+            //SDL_Delay();
+        }
 
-        if (SDL_GetTicks () - frametime < minframetime_)
-            SDL_Delay (minframetime_ - (SDL_GetTicks () - frametime));
 
     }
 }

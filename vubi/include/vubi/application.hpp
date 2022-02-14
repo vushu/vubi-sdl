@@ -25,8 +25,7 @@ namespace vubi {
             void quit();
         private:
             bool running_ = true;
-            const Uint32 fps_ = 60;
-            const Uint32 minframetime_ = 1000 / fps_;
+            const float time_per_frame = 1.0f/60.0;
             void setup_defaults();
             bool setup_sdl();
             void game_loop();
