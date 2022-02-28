@@ -6,6 +6,8 @@
 #include <iostream>
 namespace vubi{
 
+    Application* Application::instance_;
+
     bool Application::setup_sdl()  {
         bool success = true;
 
