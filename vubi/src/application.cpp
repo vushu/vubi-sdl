@@ -185,5 +185,8 @@ SDL_Surface* Application::get_screen_surface() {
     return screen_surface_;
 }
 
+Application& Application::get_instance() {
+    return *instance_;
+}
 
 
