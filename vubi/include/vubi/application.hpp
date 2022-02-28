@@ -5,9 +5,13 @@
 namespace vubi {
     class Application {
         public:
-            Application (std::string title, int width, int height): title_(title), width_(width), height_(height){}
+            Application (std::string title, int width, int height): title_(title), width_(width), height_(height){
+            }
             ~Application ();
             void run();
+
+            Application(Application const&) = delete;
+            void operator=(Application const&) = delete;
 
         protected:
             std::string title_;
@@ -36,4 +40,6 @@ namespace vubi {
             void game_loop();
             void destroy_sdl();
     };
+
+    static Application* app;
 }

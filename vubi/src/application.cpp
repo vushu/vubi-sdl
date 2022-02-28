@@ -158,6 +158,7 @@ void Application::quit() {
 
 void Application::run() {
     if (setup_sdl()) {
+        vubi::app = this;
         setup_defaults();
         init();
         game_loop();
