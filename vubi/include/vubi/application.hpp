@@ -15,6 +15,10 @@ namespace vubi {
             TTF_Font* get_default_font();
             SDL_Surface* get_screen_surface();
 
+        static Application& get_instance(){
+            return *instance_;
+        }
+
         protected:
             std::string title_;
             int width_, height_;
@@ -41,7 +45,8 @@ namespace vubi {
             bool setup_sdl();
             void game_loop();
             void destroy_sdl();
+            static Application* instance_;
     };
 
-    static Application* app;
+
 }
