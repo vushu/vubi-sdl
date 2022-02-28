@@ -169,4 +169,21 @@ void Application::run() {
     }
 }
 
+SDL_Window* Application::get_window() {
+    return window_;
+}
+
+SDL_Renderer* Application::get_renderer() {
+    return renderer_;
+}
+
+TTF_Font* Application::get_default_font() {
+    return default_font_;
+}
+
+SDL_Surface* Application::get_screen_surface() {
+    return screen_surface_;
+}
+
+
 

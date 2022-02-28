@@ -10,8 +10,10 @@ namespace vubi {
             ~Application ();
             void run();
 
-            Application(Application const&) = delete;
-            void operator=(Application const&) = delete;
+            SDL_Window* get_window();
+            SDL_Renderer* get_renderer();
+            TTF_Font* get_default_font();
+            SDL_Surface* get_screen_surface();
 
         protected:
             std::string title_;
