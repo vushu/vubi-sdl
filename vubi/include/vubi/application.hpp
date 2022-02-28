@@ -7,15 +7,13 @@ namespace vubi {
         public:
             Application (std::string title, int width, int height): title_(title), width_(width), height_(height){
             }
-            ~Application ();
             void run();
 
             SDL_Window* get_window();
             SDL_Renderer* get_renderer();
             TTF_Font* get_default_font();
             SDL_Surface* get_screen_surface();
-
-        static Application& get_instance();
+            static Application& get_instance();
 
         protected:
             std::string title_;
