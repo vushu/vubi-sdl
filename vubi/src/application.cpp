@@ -186,4 +186,17 @@ namespace vubi{
     Application& Application::get_instance() {
         return *Application::instance_;
     }
+
+    std::string Application::get_title() {
+        return title_;
+    }
+
+    int Application::get_width() {
+        return width_;
+    }
+
+    int Application::get_height() {
+        return height_;
+    }
+
 }

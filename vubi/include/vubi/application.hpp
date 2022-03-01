@@ -14,6 +14,9 @@ namespace vubi {
             TTF_Font* get_default_font();
             SDL_Surface* get_screen_surface();
             static Application& get_instance();
+            std::string get_title();
+            int get_width();
+            int get_height();
 
         protected:
             std::string title_;
