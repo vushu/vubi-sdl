@@ -124,7 +124,7 @@ namespace vubi{
 
             //So we aren't hogging the CPU
             delta_time = (last - now) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
-            SDL_Delay(std::floor(ms_per_frame - delta_time));
+            SDL_Delay(std::floor(std::abs(ms_per_frame - delta_time)));
 
         }
     }
