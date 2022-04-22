@@ -1,4 +1,4 @@
-#include "game.hpp"
+#include "game.h"
 Game game("Game", 640, 360);
 
 int main() {
