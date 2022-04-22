@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL_mixer.h>
-#include <vubi/application.hpp>
+#include <vubi/application.h>
 #include <string>
 
 class Game : public vubi::Application {

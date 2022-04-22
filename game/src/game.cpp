@@ -1,5 +1,5 @@
 #include "game.hpp"
-#include <vubi/application.hpp>
+#include <vubi/application.h>
 #include <string>
 #include <iostream>
 #include <SDL2/SDL_ttf.h>
