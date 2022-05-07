@@ -3,9 +3,9 @@
 #include <SDL_ttf.h>
 #include <string>
 namespace vubi {
-    class Application {
+    class SDLApplication {
         public:
-            Application (std::string title, int width, int height): title_(title), width_(width), height_(height){
+            SDLApplication (std::string title, int width, int height): title_(title), width_(width), height_(height){
             }
             void run();
 
@@ -13,7 +13,7 @@ namespace vubi {
             SDL_Renderer* get_renderer();
             TTF_Font* get_default_font();
             SDL_Surface* get_screen_surface();
-            static Application& get_instance();
+            static SDLApplication& get_instance();
             std::string get_title();
             int get_width();
             int get_height();
@@ -44,7 +44,7 @@ namespace vubi {
             bool setup_sdl();
             void game_loop();
             void destroy_sdl();
-            static Application* instance_;
+            static SDLApplication* instance_;
     };
 
 

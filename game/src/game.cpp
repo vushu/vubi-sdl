@@ -1,11 +1,11 @@
 #include "game.h"
-#include <vubi/application.h>
+#include <vubi/sdl_application.h>
 #include <string>
 #include <iostream>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 
-Game::Game(std::string title, int width, int height): vubi::Application(title, width, height) {}
+Game::Game(std::string title, int width, int height): vubi::SDLApplication(title, width, height) {}
 
 Game::~Game() {
     SDL_DestroyTexture(welcome_texture);

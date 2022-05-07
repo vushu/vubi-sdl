@@ -1,9 +1,9 @@
 #pragma once
 #include <SDL_mixer.h>
-#include <vubi/application.h>
+#include <vubi/sdl_application.h>
 #include <string>
 
-class Game : public vubi::Application {
+class Game : public vubi::SDLApplication {
     public:
         // constructors, assignment, destructor
         Game(std::string title, int width, int height);

@@ -1,14 +1,14 @@
 #include <SDL_mixer.h>
 #include <SDL_render.h>
 #include <SDL_ttf.h>
-#include <vubi/application.h>
+#include <vubi/sdl_application.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
 namespace vubi{
 
-    Application* Application::instance_;
+    SDLApplication* SDLApplication::instance_;
 
-    bool Application::setup_sdl()  {
+    bool SDLApplication::setup_sdl()  {
         bool success = true;
 
 
@@ -82,11 +82,11 @@ namespace vubi{
     }
 
     //Virtual methods
-    void Application::init() {}
-    void Application::input(SDL_Event& event) {}
-    void Application::update() {}
+    void SDLApplication::init() {}
+    void SDLApplication::input(SDL_Event& event) {}
+    void SDLApplication::update() {}
 
-    void Application::destroy_sdl() {
+    void SDLApplication::destroy_sdl() {
         SDL_FreeSurface(screen_surface_);
         SDL_DestroyRenderer(renderer_);
         SDL_DestroyWindow(window_);
@@ -97,7 +97,7 @@ namespace vubi{
         SDL_Quit();
     }
 
-    void Application::handle_inputs(SDL_Event& event) {
+    void SDLApplication::handle_inputs(SDL_Event& event) {
 
         while (SDL_PollEvent (&event) != 0)
         {
@@ -106,7 +106,7 @@ namespace vubi{
 
     }
 
-    void Application::game_loop() {
+    void SDLApplication::game_loop() {
         SDL_Event event;
         Uint64 now;
         Uint64 last;
@@ -129,34 +129,34 @@ namespace vubi{
         }
     }
 
-    void Application::draw_color(int r, int g, int b, int a) {
+    void SDLApplication::draw_color(int r, int g, int b, int a) {
         SDL_SetRenderDrawColor(renderer_, r, g, b, a);
     }
 
-    void Application::setup_defaults() {
+    void SDLApplication::setup_defaults() {
     }
 
-    void Application::clear(int r, int g, int b, int a) {
+    void SDLApplication::clear(int r, int g, int b, int a) {
         draw_color(r, g, b, a);
         SDL_RenderClear(renderer_);
     }
 
-    void Application::clear() {
+    void SDLApplication::clear() {
         draw_color(133, 158, 204, 255);
         SDL_RenderClear(renderer_);
     }
 
-    void Application::render() {
+    void SDLApplication::render() {
         SDL_RenderPresent(renderer_);
     }
 
-    void Application::quit() {
+    void SDLApplication::quit() {
         running_ = false;
     }
 
-    void Application::run() {
+    void SDLApplication::run() {
         if (setup_sdl()) {
-            Application::instance_ = this;
+            SDLApplication::instance_ = this;
             setup_defaults();
             init();
             game_loop();
@@ -167,35 +167,35 @@ namespace vubi{
         }
     }
 
-    SDL_Window* Application::get_window() {
+    SDL_Window* SDLApplication::get_window() {
         return window_;
     }
 
-    SDL_Renderer* Application::get_renderer() {
+    SDL_Renderer* SDLApplication::get_renderer() {
         return renderer_;
     }
 
-    TTF_Font* Application::get_default_font() {
+    TTF_Font* SDLApplication::get_default_font() {
         return default_font_;
     }
 
-    SDL_Surface* Application::get_screen_surface() {
+    SDL_Surface* SDLApplication::get_screen_surface() {
         return screen_surface_;
     }
 
-    Application& Application::get_instance() {
-        return *Application::instance_;
+    SDLApplication& SDLApplication::get_instance() {
+        return *SDLApplication::instance_;
     }
 
-    std::string Application::get_title() {
+    std::string SDLApplication::get_title() {
         return title_;
     }
 
-    int Application::get_width() {
+    int SDLApplication::get_width() {
         return width_;
     }
 
-    int Application::get_height() {
+    int SDLApplication::get_height() {
         return height_;
     }
 
